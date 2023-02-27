@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+	<form method="post" th:action="@{/signUp}" th:object="${userform}">
+		<div th:errors="*{userId}"></div>
+		<div>
+			<span>ID</span><input th:field="*{userId}">
+		</div>
+		<div th:errors="*{password}"></div>
+		<div>
+			<span>비밀번호</span><input type="password" th:field="*{password}">
+		</div>
+		<div th:errors="*{password2}"></div>
+		<div>
+			<span>비밀번호 확인</span><input type="password" th:field="*{password2}">
+		</div>
+		<div th:errors="*{name}"></div>
+		<div>
+			<span>이름</span><input th:field="*{name}">
+		</div>
+		<input type="submit">
+	</form>
+</body>
+</html>

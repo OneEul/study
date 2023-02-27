@@ -1,0 +1,23 @@
+<html layout:decorate="~{main}">
+	<section layout:fragment="content">
+		<form method="post" th:action="@{/productCreate}" th:object="${productForm}">
+			<div th:errors="*{productName}"></div>
+			<div>
+				<span>상품명</span><input th:field="*{productName}">
+			</div>
+			<div th:errors="*{keyword}"></div>
+			<div>
+				<span>키워드</span><input th:field="*{keyword}">
+			</div>
+			<div th:errors="*{category}"></div>
+			<div>
+				<span>카테고리</span><input th:field="*{category}">
+			</div>
+			<div th:errors="*{brand}"></div>
+			<div>
+				<span>브랜드</span><input th:field="*{brand}">
+			</div>
+			<input type="submit">
+		</form>
+	</section>
+</html>

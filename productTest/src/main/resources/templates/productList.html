@@ -1,0 +1,97 @@
+<html layout:decorate="~{main}">
+	<section layout:fragment="content">
+		<style>
+			.searchBox{margin-bottom: 30px; display: flex; justify-content: center}
+			.searchBox>form{margin-right: 20px; display: flex;}
+			.searchBox>form>div{margin-right: 10px;}
+			.searchBox>form>input{padding: 11px; border: 1px solid #3C3939; border-radius: 5px; outline: none; margin: 20px 0 20px; color: black; transition: all 0.5s;}
+			.searchBox>form>input[type="submit"]{background-color: rgb(118, 159, 235);}
+			article>div{display: flex; justify-content: center;}
+			article>div:nth-child(1){margin: 0 64px 10px 0;}
+			article>div>div{width: 320px; text-align: center;}
+			.pageCount{display: flex; justify-content: center; align-items: center;}
+			.pageCount>div>a{margin: 10px 0;}
+		</style>
+		<article class="searchBox">
+			<form method="post" th:action="@{/productIdSearch}">
+				<input name="search" onkeyup="goIdSearch()" th:value="${IdSearch}" placeholder="상품 ID 검색">
+				<input type="submit" value="검색">
+			</form>
+			<form method="post" th:action="@{/productNameSearch}">
+				<input name="search" onkeyup="goNameSearch()" th:value="${NameSearch}" placeholder="상품명 검색">
+				<input type="submit" value="검색">
+			</form>
+			<form method="post" th:action="@{/productKeySearch}">
+				<input name="search" onkeyup="goKeySearch()" th:value="${KeySearch}" placeholder="키워드 검색">
+				<input type="submit" value="검색">
+			</form>
+			<form method="post" th:action="@{/productCateSearch}">
+				<input name="search" onkeyup="goCateSearch()" th:value="${CateSearch}" placeholder="카테고리 검색">
+				<input type="submit" value="검색">
+			</form>
+			<form method="post" th:action="@{/productBrandSearch}">
+				<input name="search" onkeyup="goBrandSearch()" th:value="${BrandSearch}" placeholder="브랜드 검색">
+				<input type="submit" value="검색">
+			</form>
+		</article>
+		<section>
+			<article>
+				<div>
+					<div>상품 ID</div>
+					<div>상품명</div>
+					<div>키워드</div>
+					<div>카테고리</div>
+					<div>브랜드</div>
+				</div>
+				<div th:each="paging, loop : ${paging}">
+					<div th:text="${paging.productID}"></div>
+					<div th:text="${paging.productName}"></div>
+					<div th:text="${paging.keyword}"></div>
+					<div th:text="${paging.category}"></div>
+					<div th:text="${paging.brand}"></div>
+					<a th:href="@{|/productUpdate/${paging.productID}|}">수정</a>
+					<a th:href="@{|/productDelete/${paging.productID}|}" onclick="confirmDelete(); return false;">삭제</a>
+				</div>
+			</article>
+		</section>
+		<section class="pageCount">
+	        <div>
+	            <a th:href="@{|?page=${0}|}"><<</a>
+	            <a th:href="@{|?page=${paging.number-1}|}"><</a>
+	        </div>
+	        <p><a th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}" th:if="${page >= StartNum and page <= EndNum}" th:id="${page == paging.number} ? 'pageClick'" th:text="${page+1}" th:href="@{|?page=${page}|}"></a></p>
+	        <div>
+	            <a th:href="@{|?page=${paging.number+1}|}">></a>
+	            <a th:href="@{|?page=${paging.totalPages-1}|}">>></a>
+	        </div>
+	    </section>
+	    <a href="/productCreate">상품등록</a>
+		<script>
+			function confirmDelete(){
+				if(confirm("정말 상품 ID "+event.target.parentElement.firstElementChild.innerText+"를 삭제하시겠습니까?")){
+					location.href=event.target.href;
+				}
+			}
+			
+			function goIdSearch(){
+				event.target.parentElement.action = "/productIdSearch/"+event.target.value
+			}
+			
+			function goNameSearch(){
+				event.target.parentElement.action = "/productNameSearch/"+event.target.value
+			}
+			
+			function goKeySearch(){
+				event.target.parentElement.action = "/productKeySearch/"+event.target.value
+			}
+			
+			function goCateSearch(){
+				event.target.parentElement.action = "/productCateSearch/"+event.target.value
+			}
+			
+			function goBrandSearch(){
+				event.target.parentElement.action = "/productBrandSearch/"+event.target.value
+			}
+		</script>
+	</section>
+</html>

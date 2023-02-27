@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+		@font-face {
+		    font-family: 'GmarketSansLight';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		@font-face {
+		    font-family: 'GmarketSansBold';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		*{margin:0; padding: 0; font-family: 'GmarketSansLight'; text-decoration: none;}
+		a{color: black;}
+		.unLogin{position: relative; width: 1920px; height: 961px; overflow: hidden;}
+		.helloBox{width: 500px; height: 650px; background-color: rgba(118, 159, 235, 0.8); border-radius: 40px; display: flex; align-items: center; justify-content: center; margin: 8% auto;}
+		.helloBox>div{width: 88%; height: 90%; background-color: rgba(255, 255, 255, 0.8); border-radius: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+		.helloBox>div>div:nth-child(1){margin-bottom: 30px; font-family: 'GmarketSansBold'; font-size: 50px; color: rgb(118, 159, 235);}
+		.helloBox>div>p:nth-child(1){font-family: 'GmarketSansBold'; font-size: 50px;}
+		.helloBox>div>p:nth-child(2){font-size: 32px; font-weight: 100;}
+		.helloBox>div>div{position: relative;}
+		.helloBox>div>div>input{padding: 11px 11px 11px 40px; border: 1px solid #3C3939; border-radius: 10px; margin-bottom: 7px; outline: unset; font-size: 20px;}
+		.helloBox>div>div>input:focus{border: 1px solid rgb(140, 116, 237);}
+		.helloBox>div>div>img{width: 20px; position: absolute; left: 10px; top: 15%; z-index: 3;}
+		.helloBox>div>input{padding: 10px 10px 3px 12px; background-color: rgb(118, 159, 235); border: unset; border-radius: 5px; margin: 20px 0 20px; font-size: 40px; color: white; transition: all 0.5s;}
+		.helloBox>div>input:hover{background-color: rgb(140, 116, 237);}
+		.helloBox>div>a{font-size: 12px; transition: all 0.5s;}
+		.helloBox>div>a:hover{font-family: 'GmarketSansMedium'; color: rgb(140, 116, 237);}
+		.blackBox{width: 1920px; height: 961px; background-color: rgba(0, 0, 0, 0.4); position: absolute; top: 0; left: 0; z-index: -1;}
+		.unLogin video{position: absolute; top: 0; left: 0; z-index: -2;}
+	</style>
+</head>
+<body>
+	<div th:if="${param.error}">ID 또는 비밀번호를 확인해 주세요.</div>
+	<form method="post" th:action="@{/login}" class="unLogin">
+		<div class="helloBox">
+			<div>
+				<div>LOGIN</div>
+				<div>
+					<input name="userid">
+					<img src="/images/people.png">
+				</div>
+				<div>
+					<input type="password" name="pw">
+					<img src="/images/lock2.png">
+				</div>
+				<input type="submit" value="▷">
+				<a href="/signUp">아직 ID가 없으신가요?</a>
+			</div>
+		</div>
+		<div class="blackBox"></div>
+		<video autoplay loop muted>
+			<source src="video/-3132.mp4" type="video/mp4">
+		</video>
+	</form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html layout:decorate="~{main}">
+	<section layout:fragment="content">
+		<form method="post" th:action th:object="${productUpdateForm}"><!-- th:action의 경우 값을 안 넣으면 같은 url에 post 요청 -->
+			<div th:errors="*{productName}"></div>
+			<div>
+				<span>상품명</span><input name="productName" th:value="${productDTO.productName}">
+			</div>
+			<div th:errors="*{keyword}"></div>
+			<div>
+				<span>키워드</span><input name="keyword" th:value="${productDTO.keyword}">
+			</div>
+			<div th:errors="*{category}"></div>
+			<div>
+				<span>카테고리</span><input name="category" th:value="${productDTO.category}">
+			</div>
+			<div th:errors="*{brand}"></div>
+			<div>
+				<span>브랜드</span><input name="brand" th:value="${productDTO.brand}">
+			</div>
+			<input type="submit">
+		</form>
+	</section>
+</html>

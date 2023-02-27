@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+		@font-face {
+		    font-family: 'GmarketSansLight';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		@font-face {
+		    font-family: 'GmarketSansBold';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		*{margin:0; padding: 0; font-family: 'GmarketSansLight'; text-decoration: none;}
+		a{color: black;}
+		.navHead{margin-bottom: 30px;}
+		.unLogin{position: relative; width: 1920px; height: 961px; overflow: hidden;}
+		.helloBox{width: 500px; height: 650px; background-color: rgba(118, 159, 235, 0.8); border-radius: 40px; display: flex; align-items: center; justify-content: center; margin: 8% auto;}
+		.helloBox>div{width: 88%; height: 90%; background-color: rgba(255, 255, 255, 0.8); border-radius: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+		.helloBox>div>p:nth-child(1){font-family: 'GmarketSansBold'; font-size: 50px;}
+		.helloBox>div>p:nth-child(2){font-size: 32px; font-weight: 100;}
+		.helloBox>div>a{padding: 10px; background-color: rgb(118, 159, 235); border-radius: 5px; margin-top: 20px; font-size: 20px; color: white; transition: all 0.5s;}
+		.helloBox>div>a:hover{background-color: rgb(140, 116, 237);}
+		.blackBox{width: 1920px; height: 961px; background-color: rgba(0, 0, 0, 0.4); position: absolute; top: 0; left: 0; z-index: -1;}
+		.unLogin video{position: absolute; top: 0; left: 0; z-index: -2;}
+		
+		.navHead>div:nth-child(1){width: 80vw; height: 5vh; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;}
+		.navHead>div:nth-child(2){display: flex; justify-content: right; margin-right: 10vw;}
+	</style>
+</head>
+<body>
+	<div sec:authorize="isAnonymous()" class="unLogin">
+		<div class="helloBox">
+			<div>
+				<p>상품등록</p>
+				<p>TEST 페이지</p>
+				<a href="/login">로그인</a>
+			</div>
+		</div>
+		<div class="blackBox"></div>
+		<video autoplay loop muted>
+			<source src="video/-3132.mp4" type="video/mp4">
+		</video>
+	</div>
+	<div sec:authorize="isAuthenticated()" class="navHead">
+		<div>
+			<p><span th:text="${userId}"></span>님 환영합니다.</p>
+			<p>
+				<a href="/productList">상품목록</a>
+				<a href="/logout">로그아웃</a>
+			</p>
+		</div>
+		<div>
+			<form th:action="@{/excelRead}" method="POST" enctype="multipart/form-data">
+	    	<input type="file" name="file">
+	    	<input type="submit" value="제출" />
+	    </form>
+		</div>
+	</div>
+	<th:block layout:fragment="content"></th:block>
+</body>
+</html>
